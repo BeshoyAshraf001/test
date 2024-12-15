@@ -1,0 +1,171 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .form-control {
+    @apply w-full px-4 py-2 border border-gray-300 rounded-lg outline-none
+      transition-all duration-300 focus:ring-2 focus:ring-primary-300
+      focus:border-primary-300 caret-primary-400;
+  }
+
+  .btn-primary {
+    @apply px-4 py-2 bg-green-500 text-white rounded-md shadow 
+      hover:bg-green-600 hover:shadow-lg active:bg-green-700 
+      transition-all duration-300 ease-in-out;
+  }
+  .navLinkStyle {
+    @apply relative before:absolute before:w-0 before:h-0.5 before:bg-primary-300 before:left-0 before:-bottom-1 hover:before:w-full before:transition-all before:duration-300;
+  }
+  .iconClass {
+    @apply bg-primary-500 p-2 rounded-full size-7 text-white flex items-center justify-center text-sm cursor-pointer hover:scale-110 transition-transform duration-300 hover:rotate-[360deg];
+  }
+  .cairo{
+    @apply font-[Cairo];
+  }
+}
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: rgb(229, 231, 235);
+}
+::selection {
+  background-color: rgb(96, 214, 106);
+}
+/* *===================================> */
+
+.preloader {
+  --hue: 120;
+  --bg: hsl(var(--hue), 10%, 90%);
+  --fg: hsl(var(--hue), 10%, 10%);
+  --primary: hsl(var(--hue), 70%, 55%);
+  --trans-dur: 0.3s;
+  font-size: calc(16px + (20 - 16) * (100vw - 320px) / (1280 - 320));
+  /* color: hsl(120, 68%, 42%); */
+  .preloader {
+    text-align: center;
+    max-width: 20em;
+    width: 100%;
+  }
+  .preloader__text {
+    position: relative;
+    height: 1.5em;
+  }
+  .preloader__msg {
+    animation: msg 0.3s 13.7s linear forwards;
+    position: absolute;
+    width: 100%;
+  }
+  .preloader__msg--last {
+    animation-direction: reverse;
+    animation-delay: 14s;
+    visibility: hidden;
+  }
+  .cart {
+    display: block;
+    margin: 0 auto 1.5em auto;
+    width: 8em;
+    height: 8em;
+  }
+  .cart__lines,
+  .cart__top,
+  .cart__wheel1,
+  .cart__wheel2,
+  .cart__wheel-stroke {
+    animation: cartLines 2s ease-in-out infinite;
+  }
+  .cart__lines {
+    stroke: var(--primary);
+  }
+  .cart__top {
+    animation-name: cartTop;
+  }
+  .cart__wheel1 {
+    animation-name: cartWheel1;
+    transform: rotate(-0.25turn);
+    transform-origin: 43px 111px;
+  }
+  .cart__wheel2 {
+    animation-name: cartWheel2;
+    transform: rotate(0.25turn);
+    transform-origin: 102px 111px;
+  }
+  .cart__wheel-stroke {
+    animation-name: cartWheelStroke;
+  }
+  .cart__track {
+    stroke: hsla(var(--hue), 10%, 10%, 0.1);
+    transition: stroke var(--trans-dur);
+  }
+}
+/* Dark theme */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: hsl(var(--hue), 10%, 10%);
+    --fg: hsl(var(--hue), 10%, 90%);
+  }
+  .cart__track {
+    stroke: hsla(var(--hue), 10%, 90%, 0.1);
+  }
+}
+
+/* Animations */
+@keyframes msg {
+  from {
+    opacity: 1;
+    visibility: visible;
+  }
+  99.9% {
+    opacity: 0;
+    visibility: visible;
+  }
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+@keyframes cartLines {
+  from,
+  to {
+    opacity: 0;
+  }
+  8%,
+  92% {
+    opacity: 1;
+  }
+}
+@keyframes cartTop {
+  from {
+    stroke-dashoffset: -338;
+  }
+  50% {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: 338;
+  }
+}
+@keyframes cartWheel1 {
+  from {
+    transform: rotate(-0.25turn);
+  }
+  to {
+    transform: rotate(2.75turn);
+  }
+}
+@keyframes cartWheel2 {
+  from {
+    transform: rotate(0.25turn);
+  }
+  to {
+    transform: rotate(3.25turn);
+  }
+}
+@keyframes cartWheelStroke {
+  from,
+  to {
+    stroke-dashoffset: 81.68;
+  }
+  50% {
+    stroke-dashoffset: 40.84;
+  }
+}
